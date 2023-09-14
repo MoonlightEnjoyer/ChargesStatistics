@@ -1,11 +1,14 @@
 import pdf_parser
 import plots
 
-data = pdf_parser.parse_payments_pdf()
+income, spent = pdf_parser.parse_payments_pdf()
 
-converted_data = {}
+converted_spent = {}
 
-for d in data.keys():
-    converted_data[d] = abs(sum([eval(i) for i in data[d]]))
+total_income = sum([eval(i) for i in income])
 
-plots.draw_plot(converted_data)
+
+for d in spent.keys():
+    converted_spent[d] = abs(sum([eval(i) for i in spent[d]]))
+
+plots.build_report(total_income, converted_spent)
